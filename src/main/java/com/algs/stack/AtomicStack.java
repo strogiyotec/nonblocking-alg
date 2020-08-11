@@ -2,7 +2,7 @@ package com.algs.stack;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-public final class AtomicStack {
+final class AtomicStack {
     private AtomicReference<SingleThreadNode> heap = new AtomicReference<>();
 
     void push(final int value) {
@@ -11,7 +11,7 @@ public final class AtomicStack {
             var upd = new SingleThreadNode(current, value);
             if (this.heap.compareAndSet(current, upd)) return;
             else {
-                System.out.println("Repeat");
+                System.out.printf("Thread %s will repeat\n", Thread.currentThread().getName());
             }
         }
     }
